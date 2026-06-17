@@ -11,6 +11,10 @@ app.get('/', (_req, res) => {
     res.json({ message: 'OctoFit Tracker API' });
 });
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    const codespaceName = process.env.CODESPACE_NAME;
+    const baseUrl = codespaceName
+        ? `https://${codespaceName}-${PORT}.app.github.dev`
+        : `http://localhost:${PORT}`;
+    console.log(`Server running at ${baseUrl}`);
 });
 exports.default = app;
